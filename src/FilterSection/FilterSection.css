@@ -1,0 +1,11 @@
+.filter-section-main {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.filter-section-main > * {
+    width: 100%;
+}

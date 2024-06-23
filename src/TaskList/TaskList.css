@@ -1,0 +1,7 @@
+.task-list {
+    width: 100%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #c2c2c2;
+}
