@@ -2,27 +2,28 @@ import React, { useState } from 'react';
 import {
     Modal,
     Box,
-    TextField,
-    TextareaAutosize,
-    Select,
-    MenuItem,
-    FormControl,
-    InputLabel,
-    Button
 } from '@mui/material';
 import './FormModal.css'
+import { updateTask } from '../api';
 
 
 
-function FormModal({ open, handleClose, formData }) {
+function FormModal({ open, handleClose, formData, actionType }) {
     const [title, setTitle] = useState(formData ? formData.title : '');
     const [description, setDescription] = useState(formData ? formData.description : '');
     const [status, setStatus] = useState(formData ? formData.status : '');
 
-    const handleSave = () => {
-        const data = { title, description, status };
-        // Handle save logic here
-        console.log(data);
+    const handleUpdate = () => {
+        const data = {
+            title: title,
+            description: description,
+            status: status
+        };
+        updateTask(data, formData.taskId)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+        })
         handleClose();
     };
 
@@ -34,38 +35,24 @@ function FormModal({ open, handleClose, formData }) {
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
         >
-            <Box className='form-modal-box' >
-                <TextField
-                    label="Title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    fullWidth
-                    margin="normal"
-                    variant='standard'
-                    className='form-input'
-                />
-                <TextareaAutosize
-                    minRows={4}
-                    placeholder="Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className='form-textarea'
-                />
-                <FormControl fullWidth margin="normal">
-                    <InputLabel id="status-label">Status</InputLabel>
-                    <Select
-                        labelId="status-label"
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value)}
-                    >
-                        <MenuItem value="IN_PROGRESS">In progress</MenuItem>
-                        <MenuItem value="COMPLETED">Completed</MenuItem>
-                        <MenuItem value="TO_DO">To do</MenuItem>
-                    </Select>
-                </FormControl>
-                <Button variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 16 }}>
-                    Save
-                </Button>
+            <Box className='form-modal-box'>
+                <label htmlFor='task-title'>Task Title</label>
+                <input id="task-title" type="text" value={title} onChange={(e)=>setTitle(e.target.value)}/>
+                <label htmlFor='task-description'>Task Description</label>
+                <textarea id="task-description" value={description} onChange={(e)=>setDescription(e.target.value)} />
+                
+                <label htmlFor='task-status'>Task Status</label>
+                <select id="task-status" onSelect={(e) => setStatus(e.target.value)}>
+                    <option value="TO_DO">To Do</option>
+                    <option value="IN_PROGRESS">In Progress</option>
+                    <option value="COMPLETED">Completed</option>
+                </select>
+                {
+                    actionType === "UPDATE" ? 
+                    <button onClick={handleUpdate}>Update</button> :
+                    <button>Create</button>
+                }
+                
             </Box>
         </Modal>
     );

@@ -1,22 +1,12 @@
 import React, { useState } from 'react'
 import './Task.css'
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { useForm, SubmitHandler } from "react-hook-form"
-import { Button, Modal } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import FormModal from '../FormModal/FormModal';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 // https://colorhunt.co/palette/070f2b1b1a55535c919290c3
-function Task() {
+function Task({taskId, title, description, status}) {
 	const [edit, setEdit] = useState(false)
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm()
 
 	const onSubmit = (data) => console.log(data)
 
@@ -28,21 +18,24 @@ function Task() {
 		setEdit(!edit)
 	}
 
+	const deleteTask = (e) => {
+
+	}
+
 	return (
 		<div className='task'>
-			{		<>
-					<FormModal open={edit} handleClose={handleClose} formData={null}/>
+			{<>
+				<FormModal open={edit} handleClose={handleClose} formData={{taskId:taskId, title:title, description:description, status:status}} actionType="UPDATE" />
 
-					<div >
-
-						<div>
-
-							<h1>Title</h1>
-							<span onClick={() => setEdit(!edit)}>edit</span>
-						</div>
-						<p>Description</p>
+				<div className='m-10'>
+					<div className='task-title-container'>
+						<h1 className='task-title'>{title}</h1>
+						<EditIcon className='icon' onClick={() => setEdit(!edit)}/>
+						<DeleteIcon className='icon' onClick={deleteTask}/>
 					</div>
-					</>
+					<p className='task-description'>{description}</p>
+				</div>
+			</>
 			}
 
 		</div>

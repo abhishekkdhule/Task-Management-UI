@@ -2,27 +2,32 @@
     margin: 10px 0;
     padding: 10px 0;
     width: 100%;
-    border-radius: 5px;
-    background-color: #353535;
+    border-radius: 8px;
+    background-color: #c1c0c0;
     box-shadow: 0 0 2 2 #535C91;
-    color: white;
+    color: black;
+    box-shadow: 0 0 8px 2px rgb(197, 197, 197);
+}
+
+.task-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .task-title {
+    width: 85%;
     font-size: 2em;
     font-weight: 600;
+    margin: 5px 0;
 }
 
-.modal-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background-color: #535C91;
-    box-shadow: 24px;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    outline: none;
+.task-title-container > .icon {
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.task-description {
+    margin: 5px 0;
 }

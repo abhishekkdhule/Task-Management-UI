@@ -3,39 +3,41 @@
 }
 
 .form-modal-box {
-    background-color: #353535;
-    padding: 10px;
+    background-color: #dcdcdc;
+    padding: 25px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
     outline: none;
-    box-shadow: 0px 0px 20px 5px #535C91;
+    box-shadow: 0px 0px 20px 5px #3b3b3b;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
 }
 
-.form-input .MuiInputBase-root {
-    color: #ffffff; /* Change text color */
+.form-modal-box > input, textarea, select {
+    padding: 8px 5px;
+    outline: none;
+    margin: 4px 0;
+    border-radius: 8px;
+    border-width: 0;
 }
 
-.form-input .MuiOutlinedInput-notchedOutline {
-    border-color: #ffffff; /* Change outline color */
+.form-modal-box > label {
+    margin: 8px 0 0 0 ;
+    color: black;
 }
 
-.form-input .MuiInputLabel-root {
-    color: #ffffff; /* Change label color */
-}
-
-.form-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: #ffffff; /* Change outline color when focused */
-}
-
-.form-input .MuiInputLabel-root.Mui-focused {
-    color: #ffffff; /* Change label color when focused */
-}
-
-.form-textarea {
-    width: 100%;
-    background-color: transparent;
+.form-modal-box > button {
+    margin: 20px 0 10px;
+    padding: 10px 0;
+    font-size: 18px;
     color: white;
+    background: #282828;
+    border: 0;
+    border-width: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 1px #4e4e4e;
 }

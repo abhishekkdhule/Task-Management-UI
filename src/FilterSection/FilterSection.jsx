@@ -40,6 +40,9 @@ function FilterSection() {
                     <DatePicker />
                 </LocalizationProvider>
             </div>
+  
+                <button>Create Task</button>
+   
         </div>
     )
 }
