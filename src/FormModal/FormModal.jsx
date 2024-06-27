@@ -4,7 +4,7 @@ import {
     Box,
 } from '@mui/material';
 import './FormModal.css'
-import { updateTask } from '../api';
+import { createTask, updateTask } from '../api';
 
 
 
@@ -26,6 +26,26 @@ function FormModal({ open, handleClose, formData, actionType }) {
         })
         handleClose();
     };
+
+    const handleCreateTask = () =>  {
+        const data = {
+            title: title,
+            description: description,
+            status: status
+        };
+        createTask(data)
+        .then((response) => {
+            if (response.status === 201) 
+                console.log("Created Task")
+            throw Error("Internal Server Error")
+        })
+        .catch(error => {
+            alert(error)
+        })
+
+    }
+
+
 
     return (
         <Modal
@@ -50,7 +70,7 @@ function FormModal({ open, handleClose, formData, actionType }) {
                 {
                     actionType === "UPDATE" ? 
                     <button onClick={handleUpdate}>Update</button> :
-                    <button>Create</button>
+                    <button onClick={handleCreateTask}>Create</button>
                 }
                 
             </Box>

@@ -15,7 +15,8 @@ const STATUS_OPTIONS = [
 ]
 
 const OPTIONS = ["To do", "In Progress", "Completed"]
-function FilterSection() {
+
+function FilterSection({filters, setFilters}) {
     return (
         <div className='filter-section-main'>
             <div>
@@ -37,7 +38,7 @@ function FilterSection() {
             </div>
             <div>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker />
+                    <DatePicker value={filters.date} onChange={(newDate) => setFilters({...filters, date: newDate})}/>
                 </LocalizationProvider>
             </div>
   

@@ -5,7 +5,8 @@ export const createTask = (taskDetails) => {
                 'Content-Type': 'application/json',
             },
             method: 'POST',
-            body: []
+            credentials: 'include',
+            body: JSON.stringify(taskDetails)
         }
     ).then((response) => response.json())
         .then((data) => {
@@ -36,8 +37,18 @@ export const deleteTask = (taskId) => {
         })
 }
 
-export const getTasks = (date) => {
-    return fetch(`http://127.0.0.1:8000/api/v1/task`,
+export const getTasks = (filters) => {
+    let queryParams = `?date=${filters.date.format('DD/MM/YYYY')}`
+    if (filters.taskStatus) {
+        let statusStr = filters.taskStatus.reduce((con, value) => {
+            con += value + ','
+            return con
+        }, ``)
+        
+        queryParams += `&status=${statusStr.substring(0,statusStr.length-1)}`
+    }
+
+    return fetch(`http://127.0.0.1:8000/api/v1/task/${queryParams}`,
         {
             method: 'GET',
             credentials: 'include'
